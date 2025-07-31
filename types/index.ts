@@ -1,3 +1,12 @@
+export interface User {
+    id: string
+    name: string
+    email: string
+    role: 'admin' | 'cashier'
+    createdAt: string
+    updatedAt: string
+}
+
 export interface Product {
     id: string
     name: string
@@ -14,19 +23,22 @@ export interface CartItem extends Product {
 }
 
 export interface Order {
-    id: number
+    id: string
     items: CartItem[]
     total: number
     date: string
     paymentMethod: string
+    customerName?: string
+    discount?: number
+    cashierId?: string
 }
 
 export interface DashboardStats {
     todaySales: number
-    todayOrders: number
     monthSales: number
-    monthOrders: number
     yearSales: number
+    todayOrders: number
+    monthOrders: number
     totalProducts: number
     lowStockProducts: number
     topSellingProducts: Array<{
@@ -45,14 +57,16 @@ export interface DashboardStats {
         orders: number
     }>
     monthlySales: Array<{
-        date: string
+        month: string
         sales: number
         orders: number
     }>
 }
+
 export interface AppState {
     products: Product[]
     cart: CartItem[]
     orders: Order[]
-    activaTab: string
+    activeTab: string
+    user: User | null
 }
